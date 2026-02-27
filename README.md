@@ -9,7 +9,7 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: #060d14; color: #c0d0e0; font-family: 'DM Sans', sans-serif; min-height: 100vh; }
-  ::selection { background: #1a4a7a; }
+  ::selection { background: #1a4a7a; } 
 
   input[type=range] { -webkit-appearance: none; background: #1a2a3a; border-radius: 4px; height: 4px; outline: none; }
   input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: #c0d0e0; cursor: pointer; border: 2px solid #060d14; }
