@@ -30,8 +30,6 @@
   .controls select { background: #ffffff; border: 1px solid #d0dce8; color: #1a2a3a; padding: 6px 10px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; }
   .btn-run { background: linear-gradient(135deg, #1a7a4a 0%, #0f6a38 100%); border: 1px solid #1a6a3a; color: #ffffff; padding: 8px 20px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; letter-spacing: 0.03em; font-family: 'DM Sans', sans-serif; box-shadow: 0 2px 6px rgba(0,100,50,0.2); }
   .btn-run:disabled { background: linear-gradient(90deg, #c8d4e0, #dce8f0, #c8d4e0); background-size: 200% 100%; animation: shimmer 1.5s linear infinite; cursor: wait; color: #8ba3bd; border-color: #c8d4e0; }
-  .btn-adjust { background: #ffffff; border: 1px solid #d0dce8; color: #4a6a8a; padding: 8px 14px; border-radius: 8px; font-size: 12px; cursor: pointer; font-weight: 600; font-family: 'DM Sans', sans-serif; }
-  .btn-adjust.active { background: #e4ecf5; border-color: #b0c8e0; }
 
   .view-btn { border: 1px solid #d0dce8; padding: 6px 12px; border-radius: 6px; font-size: 11px; cursor: pointer; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: 'DM Sans', sans-serif; }
   .view-btn.inactive { background: #ffffff; color: #6b8299; }
@@ -70,15 +68,6 @@
   .tooltip-wrap:hover .tooltip-box { display: block; }
   .tooltip-arrow { position: absolute; top: -5px; left: 50%; transform: translateX(-50%) rotate(45deg); width: 8px; height: 8px; background: #162232; border-left: 1px solid #2a4a6a; border-top: 1px solid #2a4a6a; }
 
-  .adj-panel { background: #ffffff; border-radius: 12px; border: 1px solid #d0dce8; padding: 16px; margin-bottom: 20px; animation: fadeUp 0.3s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-
-  .adj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 2px 24px; }
-  .adj-row { display: flex; align-items: center; gap: 8px; padding: 4px 0; }
-  .adj-abbr { width: 34px; font-weight: 700; font-size: 11px; color: #8ba3bd; }
-  .adj-val { width: 36px; text-align: right; font-weight: 700; font-size: 12px; }
-  .adj-pos { color: #4ade80; }
-  .adj-neg { color: #f87171; }
-  .adj-zero { color: #4a5a6a; }
 
   .stat-card { display: flex; gap: 12px; padding: 10px 14px; background: #f5f7fa; border-radius: 8px; border: 1px solid #d0dce8; margin-bottom: 8px; }
   .stat-icon { font-size: 20px; flex-shrink: 0; }
@@ -129,7 +118,6 @@
       </select>
     </div>
     <button class="btn-run" id="runBtn" onclick="handleRun()">▶ Run Simulation</button>
-    <button class="btn-adjust" id="adjBtn" onclick="toggleAdjust()">⚙ Adjust Teams</button>
     <div style="margin-left:auto;display:flex;gap:4px">
       <button class="view-btn active" id="viewDiv" onclick="setView('division')">By Division</button>
       <button class="view-btn inactive" id="viewLeague" onclick="setView('league')">By League</button>
@@ -137,7 +125,6 @@
   </div>
 
   <!-- Adjustment Panel (hidden by default) -->
-  <div id="adjPanel" class="adj-panel hidden"></div>
 
   <!-- Stat Guide -->
   <div class="panel" style="margin-bottom:16px">
@@ -293,7 +280,6 @@ const COLUMN_TOOLTIPS = {
 };
 
 // ── STATE ──
-let adjustments = {};
 let currentResults = null;
 let viewMode = "division";
 
@@ -335,15 +321,13 @@ function percentile(arr, p) {
 
 // ── SIMULATION ENGINE ──
 
-function runSimulation(teamsData, numSims, adjustments) {
+function runSimulation(teamsData, numSims) {  
   const allTeams = [];
   const divisionMap = {};
 
   for (const [div, teams] of Object.entries(teamsData)) {
     for (const t of teams) {
-      const adj = adjustments[t.abbr] || 0;
-      const adjWins = Math.max(30, Math.min(130, t.wins + adj));
-      const wp = adjWins / 162;
+      const wp = t.wins / 162;
       allTeams.push({ ...t, adjWins, wp, division: div });
       if (!divisionMap[div]) divisionMap[div] = [];
       divisionMap[div].push(t.abbr);
@@ -533,58 +517,16 @@ function handleRun() {
   document.getElementById('simCountLabel').textContent = `Monte Carlo Simulation • ${numSims.toLocaleString()} Iterations`;
 
   setTimeout(() => {
-    currentResults = runSimulation(TEAMS_DATA, numSims, adjustments);
+currentResults = runSimulation(TEAMS_DATA, numSims);
     renderResults();
     btn.disabled = false;
     btn.textContent = '▶ Run Simulation';
   }, 50);
 }
 
-function toggleAdjust() {
-  const panel = document.getElementById('adjPanel');
-  const btn = document.getElementById('adjBtn');
-  if (panel.classList.contains('hidden')) {
-    panel.classList.remove('hidden');
-    btn.classList.add('active');
-    buildAdjPanel();
-  } else {
-    panel.classList.add('hidden');
-    btn.classList.remove('active');
-  }
-}
 
-function buildAdjPanel() {
-  const panel = document.getElementById('adjPanel');
-  let html = '<div style="font-size:11px;color:#4a6a8a;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px">🎛 Win Adjustments — Slide to add/subtract projected wins, then re-run</div>';
-  html += '<div class="adj-grid">';
-  for (const [div, teams] of Object.entries(TEAMS_DATA)) {
-    for (const t of teams) {
-      const val = adjustments[t.abbr] || 0;
-      const cls = val > 0 ? 'adj-pos' : val < 0 ? 'adj-neg' : 'adj-zero';
-      html += `<div class="adj-row">
-        <span class="adj-abbr">${t.abbr}</span>
-        <input type="range" min="-15" max="15" value="${val}" style="flex:1;accent-color:${t.color};height:4px;cursor:pointer" oninput="updateAdj('${t.abbr}', this.value, this)">
-        <span class="adj-val ${cls}" id="adj-${t.abbr}">${val > 0 ? '+'+val : val}</span>
-      </div>`;
-    }
-  }
-  html += '</div>';
-  html += '<button onclick="resetAdj()" style="margin-top:10px;background:transparent;border:1px solid #1a2a3a;color:#6b8299;padding:5px 12px;border-radius:6px;font-size:11px;cursor:pointer;font-family:DM Sans,sans-serif">Reset All</button>';
-  panel.innerHTML = html;
-}
 
-function updateAdj(abbr, val, input) {
-  val = parseInt(val);
-  adjustments[abbr] = val;
-  const span = document.getElementById('adj-' + abbr);
-  span.textContent = val > 0 ? '+' + val : val;
-  span.className = 'adj-val ' + (val > 0 ? 'adj-pos' : val < 0 ? 'adj-neg' : 'adj-zero');
-}
 
-function resetAdj() {
-  adjustments = {};
-  buildAdjPanel();
-}
 
 function setView(mode) {
   viewMode = mode;
