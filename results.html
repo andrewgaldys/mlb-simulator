@@ -1,10 +1,11 @@
+<!-- results.html (UPDATED) -->
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>MLB 2026 | Results</title>
-  <meta name="description" content="Final MLB games in 2026 with picks and final scores." />
+  <meta name="description" content="Final MLB regular season games in 2026 with picks and final scores." />
   <style>
     :root{
       --bg0:#ffffff;
@@ -27,14 +28,11 @@
         radial-gradient(900px 500px at 85% 20%, rgba(0,0,0,.04), transparent 55%),
         linear-gradient(180deg, var(--bg0), var(--bg1));
     }
-
     .wrap{max-width:1100px;margin:0 auto;padding:28px 18px 40px}
-
     header{
       display:flex;gap:14px;align-items:center;justify-content:space-between;
       padding:14px 14px 18px;
     }
-
     .brand{display:flex;gap:12px;align-items:center}
     .mark{
       width:38px;height:38px;border-radius:12px;
@@ -42,16 +40,11 @@
       border:1px solid var(--stroke);
       box-shadow: 0 10px 24px rgba(0,0,0,.08);
     }
-
     .titleBlock{display:flex;flex-direction:column;gap:4px}
     h1{font-size:18px;margin:0;letter-spacing:.2px}
-    .sub{
-      font-size:12.5px;color:var(--muted);
-      margin:0;
-    }
+    .sub{font-size:12.5px;color:var(--muted);margin:0}
     .sub a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(0,0,0,.18)}
     .sub a:hover{border-bottom-color:rgba(0,0,0,.35)}
-
     nav{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
     .pill{
       display:inline-flex;align-items:center;
@@ -65,17 +58,12 @@
       font-size:13px;
     }
     .pill.active{background:rgba(0,0,0,.07)}
-
     .controls{
       display:flex;gap:10px;align-items:center;justify-content:space-between;
       padding:0 14px 18px;
       flex-wrap:wrap;
     }
-
-    .filterGroup{
-      display:flex;gap:10px;align-items:center;flex-wrap:wrap;
-    }
-
+    .filterGroup{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
     .selectWrap{
       display:flex;align-items:center;gap:10px;
       padding:10px 12px;border-radius:999px;
@@ -85,7 +73,6 @@
       -webkit-backdrop-filter: blur(12px);
       box-shadow: 0 14px 34px rgba(0,0,0,.06);
     }
-
     .label{font-size:12.5px;color:var(--muted);white-space:nowrap}
     select{
       border:0;outline:0;background:transparent;
@@ -93,16 +80,13 @@
       padding:2px 0;
       max-width:220px;
     }
-
     .hint{font-size:12.5px;color:var(--muted);white-space:nowrap}
-
     .grid{
       display:grid;
       grid-template-columns: repeat(12, 1fr);
       gap:12px;
       padding:0 14px;
     }
-
     .card{
       grid-column: span 6;
       border-radius:var(--radius);
@@ -114,18 +98,15 @@
       overflow:hidden;
     }
     @media (max-width: 860px){ .card{grid-column: span 12;} }
-
     .cardHead{
       padding:14px 14px 10px;
       display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
       border-bottom:1px solid rgba(0,0,0,.06);
       background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.28));
     }
-
     .meta{display:flex;flex-direction:column;gap:4px}
     .meta .date{font-size:12.5px;color:var(--muted)}
     .meta .match{font-size:14.5px;font-weight:650;letter-spacing:.2px}
-
     .tag{
       padding:8px 10px;border-radius:999px;
       border:1px solid rgba(0,0,0,.10);
@@ -133,9 +114,7 @@
       font-size:12.5px;
       white-space:nowrap;
     }
-
     .cardBody{padding:12px 14px 14px}
-
     .teams{
       display:flex;align-items:center;justify-content:space-between;gap:10px;
       margin-bottom:10px;
@@ -156,7 +135,6 @@
       border:1px solid rgba(0,0,0,.08);
       background:rgba(255,255,255,.45);
     }
-
     .split{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -164,7 +142,6 @@
       margin-top:10px;
     }
     @media (max-width: 520px){ .split{grid-template-columns:1fr;} }
-
     .box{
       padding:10px 12px;border-radius:14px;
       border:1px solid rgba(0,0,0,.08);
@@ -181,7 +158,6 @@
       font-size:14px;font-weight:750;letter-spacing:.2px;margin:0;
       color:rgba(0,0,0,.90);
     }
-
     .empty{
       grid-column: span 12;
       border-radius:var(--radius);
@@ -244,6 +220,13 @@
   </div>
 
   <script>
+    // Regular season only + official MLB teams only (30 teams)
+    const MLB_TEAM_IDS = new Set([
+      108,109,110,111,112,113,114,115,116,117,
+      118,119,120,121,133,134,135,136,137,138,
+      139,140,141,142,143,144,145,146,147,158
+    ]);
+
     const START = new Date("2026-02-28T00:00:00Z");
     const END   = new Date("2026-12-31T23:59:59Z");
     const TZ = "America/New_York";
@@ -280,12 +263,15 @@
 
     function dayKeyET(iso){
       const d = new Date(iso);
-      return new Intl.DateTimeFormat("en-CA", { timeZone: TZ, year:"numeric", month:"2-digit", day:"2-digit" }).format(d);
+      return new Intl.DateTimeFormat("en-CA", {
+        timeZone: TZ, year:"numeric", month:"2-digit", day:"2-digit"
+      }).format(d);
     }
 
     async function fetchSchedule2026WithLinescore(){
       const url = new URL("https://statsapi.mlb.com/api/v1/schedule");
       url.searchParams.set("sportId", "1");
+      url.searchParams.set("gameTypes", "R"); // Regular season ONLY
       url.searchParams.set("startDate", "2026-02-28");
       url.searchParams.set("endDate", "2026-12-31");
       url.searchParams.set("hydrate", "team,linescore");
@@ -316,6 +302,13 @@
 
           const awayTeam = g?.teams?.away?.team || {};
           const homeTeam = g?.teams?.home?.team || {};
+
+          const awayId = awayTeam?.id;
+          const homeId = homeTeam?.id;
+
+          // Only keep real MLB vs MLB matchups
+          if(!MLB_TEAM_IDS.has(awayId) || !MLB_TEAM_IDS.has(homeId)) continue;
+
           const awayAbbr = awayTeam?.abbreviation || "";
           const homeAbbr = homeTeam?.abbreviation || "";
 
@@ -332,8 +325,8 @@
             dayKey: dayKeyET(gameDate),
             awayAbbr,
             homeAbbr,
-            awayId: awayTeam?.id,
-            homeId: homeTeam?.id,
+            awayId,
+            homeId,
             final: finalText
           });
         }
