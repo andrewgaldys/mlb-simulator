@@ -99,7 +99,6 @@
 
 <!-- Header -->
 <div class="header">
-  <div class="header-sub" id="simCountLabel">Monte Carlo Simulation • 5,000 Iterations</div>
   <h1>2026 MLB Season Simulator</h1>
   <p>Simulating every game of the 2026 season using probability theory, the Log5 formula, and real preseason projections.</p>
 </div>
@@ -328,7 +327,7 @@ function runSimulation(teamsData, numSims) {
   for (const [div, teams] of Object.entries(teamsData)) {
     for (const t of teams) {
       const wp = t.wins / 162;
-      allTeams.push({ ...t, adjWins, wp, division: div });
+allTeams.push({ ...t, wp, division: div });
       if (!divisionMap[div]) divisionMap[div] = [];
       divisionMap[div].push(t.abbr);
     }
@@ -514,7 +513,6 @@ function handleRun() {
   const numSims = parseInt(document.getElementById('simSelect').value);
   btn.disabled = true;
   btn.textContent = '⏳ Simulating...';
-  document.getElementById('simCountLabel').textContent = `Monte Carlo Simulation • ${numSims.toLocaleString()} Iterations`;
 
   setTimeout(() => {
 currentResults = runSimulation(TEAMS_DATA, numSims);
