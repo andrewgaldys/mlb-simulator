@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>MLB 2026 Picks Journal | Results</title>
-  <meta name="description" content="Past MLB games with your pick and the final outcome." />
+  <meta name="description" content="Finished MLB games with your pick and the final score." />
   <style>
     :root{
       --bg0:#ffffff;
@@ -28,26 +28,21 @@
         linear-gradient(180deg, var(--bg0), var(--bg1));
     }
     .wrap{max-width:1100px;margin:0 auto;padding:28px 18px 40px}
-
-    header{
-      display:flex;gap:14px;align-items:center;justify-content:space-between;
-      padding:14px 14px 18px;
-    }
+    header{display:flex;gap:14px;align-items:center;justify-content:space-between;padding:14px 14px 18px}
     .brand{display:flex;gap:12px;align-items:center}
     .mark{
       width:38px;height:38px;border-radius:12px;
       background:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.03));
-      border:1px solid rgba(0,0,0,.08);
+      border:1px solid var(--stroke);
       box-shadow: 0 10px 24px rgba(0,0,0,.08);
     }
     h1{font-size:18px;margin:0;letter-spacing:.2px}
     .sub{font-size:12.5px;color:var(--muted);margin-top:2px}
-
     nav{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
     .pill{
       display:inline-flex;align-items:center;gap:8px;
       padding:10px 12px;border-radius:999px;
-      border:1px solid rgba(0,0,0,.08);
+      border:1px solid var(--stroke);
       background:rgba(255,255,255,.55);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
@@ -60,22 +55,18 @@
 
     .topbar{
       display:flex;gap:10px;align-items:center;justify-content:space-between;
-      padding:0 14px 18px;
-      flex-wrap:wrap;
+      padding:0 14px 18px;flex-wrap:wrap;
     }
     .search{
       flex:1;display:flex;gap:10px;align-items:center;max-width:560px;
       padding:12px 12px;border-radius:999px;
-      border:1px solid rgba(0,0,0,.08);
+      border:1px solid var(--stroke);
       background:rgba(255,255,255,.55);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       box-shadow: 0 14px 34px rgba(0,0,0,.06);
     }
-    .search input{
-      width:100%;border:0;outline:0;background:transparent;
-      font-size:13.5px;color:var(--text);
-    }
+    .search input{width:100%;border:0;outline:0;background:transparent;font-size:13.5px;color:var(--text)}
     .hint{font-size:12.5px;color:var(--muted);white-space:nowrap}
 
     .grid{
@@ -87,7 +78,7 @@
     .card{
       grid-column: span 6;
       border-radius:var(--radius);
-      border:1px solid rgba(0,0,0,.08);
+      border:1px solid var(--stroke);
       background:var(--card);
       box-shadow:var(--shadow);
       backdrop-filter: blur(14px);
@@ -105,7 +96,6 @@
     .meta{display:flex;flex-direction:column;gap:4px}
     .meta .date{font-size:12.5px;color:var(--muted)}
     .meta .match{font-size:14.5px;font-weight:650;letter-spacing:.2px}
-
     .tag{
       padding:8px 10px;border-radius:999px;
       border:1px solid rgba(0,0,0,.10);
@@ -115,10 +105,7 @@
     }
 
     .cardBody{padding:12px 14px 14px}
-    .teams{
-      display:flex;align-items:center;justify-content:space-between;gap:10px;
-      margin-bottom:10px;
-    }
+    .teams{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
     .team{display:flex;align-items:center;gap:10px;min-width:0}
     .logo{
       width:34px;height:34px;border-radius:12px;
@@ -149,33 +136,9 @@
       border:1px solid rgba(0,0,0,.08);
       background:rgba(255,255,255,.50);
     }
-    .boxTitle{
-      font-size:12px;color:var(--muted);
-      margin:0 0 6px;
-      letter-spacing:.25px;
-      text-transform:uppercase;
-    }
-    .big{
-      font-size:14px;font-weight:750;letter-spacing:.2px;margin:0 0 6px;
-    }
-    ul{
-      margin:0;
-      padding-left:16px;
-      color:rgba(0,0,0,.75);
-      font-size:13px;
-      line-height:1.45;
-    }
-
-    footer{padding:22px 14px 0;color:var(--muted);font-size:12.5px}
-    .note{
-      border:1px solid rgba(0,0,0,.08);
-      background:rgba(255,255,255,.55);
-      border-radius:14px;
-      padding:12px 12px;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 12px 30px rgba(0,0,0,.05);
-    }
+    .boxTitle{font-size:12px;color:var(--muted);margin:0 0 6px;letter-spacing:.25px;text-transform:uppercase}
+    .big{font-size:14px;font-weight:750;letter-spacing:.2px;margin:0 0 6px}
+    ul{margin:0;padding-left:16px;color:rgba(0,0,0,.75);font-size:13px;line-height:1.45}
     .muted{color:var(--muted)}
   </style>
 </head>
@@ -187,10 +150,9 @@
         <div class="mark" aria-hidden="true"></div>
         <div>
           <h1>MLB 2026 Picks Journal</h1>
-          <div class="sub">Results you update after games finish</div>
+          <div class="sub">Final scores show up automatically after games end</div>
         </div>
       </div>
-
       <nav>
         <a class="pill" href="./index.html">Upcoming <small>2026</small></a>
         <a class="pill active" href="./results.html">Results <small>Journal</small></a>
@@ -200,19 +162,12 @@
     <div class="topbar">
       <div class="search" role="search">
         <span class="muted" aria-hidden="true">Search</span>
-        <input id="q" type="search" placeholder="Try: NYY, LAD, 04/02, final..." autocomplete="off" />
+        <input id="q" type="search" placeholder="Try: NYY, LAD, final, 746123..." autocomplete="off" />
       </div>
       <div class="hint" id="count"></div>
     </div>
 
     <main class="grid" id="list"></main>
-
-    <footer>
-      <div class="note">
-        <div><strong>Workflow:</strong> After a game ends, add an entry here with the final score and any quick notes. Keep it clean, like a logbook.</div>
-        <div class="muted">This page also auto sorts newest to oldest by date/time.</div>
-      </div>
-    </footer>
   </div>
 
   <script>
@@ -244,80 +199,103 @@
       `;
     }
 
-    function fmtDate(iso){
-      const d = new Date(iso + "T00:00:00");
-      return d.toLocaleDateString(undefined, { weekday:"short", month:"short", day:"numeric", year:"numeric" });
+    const START = new Date("2026-02-28T00:00:00Z");
+    const END   = new Date("2026-12-31T23:59:59Z");
+    const TZ = "America/New_York";
+
+    function fmtDateTimeET(iso){
+      const d = new Date(iso);
+      const date = new Intl.DateTimeFormat(undefined, { timeZone: TZ, weekday:"short", month:"short", day:"numeric", year:"numeric" }).format(d);
+      const time = new Intl.DateTimeFormat(undefined, { timeZone: TZ, hour:"numeric", minute:"2-digit" }).format(d);
+      return { date, time: `${time} ET` };
     }
 
-    function parseGameDateTime(dateISO, timeET){
-      try{
-        const m = String(timeET || "").match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
-        let hh = 0, mm = 0;
-        if(m){
-          hh = parseInt(m[1], 10);
-          mm = parseInt(m[2], 10);
-          const ap = m[3].toUpperCase();
-          if(ap === "PM" && hh !== 12) hh += 12;
-          if(ap === "AM" && hh === 12) hh = 0;
+    async function fetchSchedule2026WithLinescore(){
+      const url = new URL("https://statsapi.mlb.com/api/v1/schedule");
+      url.searchParams.set("sportId", "1");
+      url.searchParams.set("startDate", "2026-02-28");
+      url.searchParams.set("endDate", "2026-12-31");
+      // linescore hydration is commonly used to get runs.  [oai_citation:6‡Reddit](https://www.reddit.com/r/mlbdata/comments/i23k4v/help_with_using_statsapi_to_print_upcoming_game/?utm_source=chatgpt.com)
+      url.searchParams.set("hydrate", "team,linescore");
+
+      const res = await fetch(url.toString());
+      if(!res.ok) throw new Error(`Schedule fetch failed (${res.status})`);
+      return res.json();
+    }
+
+    async function fetchPicks(){
+      const res = await fetch("./picks.json", { cache: "no-store" });
+      if(!res.ok) return {};
+      return res.json();
+    }
+
+    function flattenFinalGames(json){
+      const out = [];
+      const dates = Array.isArray(json?.dates) ? json.dates : [];
+      for(const day of dates){
+        const games = Array.isArray(day?.games) ? day.games : [];
+        for(const g of games){
+          const gameDate = g?.gameDate;
+          if(!gameDate) continue;
+
+          const dt = new Date(gameDate);
+          if(dt < START || dt > END) continue;
+
+          const status = g?.status?.detailedState || "";
+          const isFinal = String(status).toLowerCase().includes("final");
+          if(!isFinal) continue;
+
+          const awayTeam = g?.teams?.away?.team || {};
+          const homeTeam = g?.teams?.home?.team || {};
+          const awayAbbr = awayTeam?.abbreviation || "";
+          const homeAbbr = homeTeam?.abbreviation || "";
+
+          const awayRuns = g?.teams?.away?.score;
+          const homeRuns = g?.teams?.home?.score;
+
+          out.push({
+            gamePk: g?.gamePk,
+            gameDate,
+            away: awayAbbr,
+            home: homeAbbr,
+            final: (Number.isFinite(awayRuns) && Number.isFinite(homeRuns))
+              ? `${awayAbbr} ${awayRuns}, ${homeAbbr} ${homeRuns}`
+              : "Final"
+          });
         }
-        return new Date(`${dateISO}T${String(hh).padStart(2,"0")}:${String(mm).padStart(2,"0")}:00`);
-      }catch{
-        return new Date(dateISO + "T00:00:00");
       }
+      // Newest first on results page
+      out.sort((a,b) => new Date(b.gameDate) - new Date(a.gameDate));
+      return out;
     }
-
-    // Results entries: you will update these after games.
-    // Fields:
-    //  - date, timeET, away, home
-    //  - pick, why
-    //  - final (example: "LAD 6, SFG 2")
-    //  - notes (short bullets)
-    const RESULTS = [
-      {
-        date: "2026-04-02",
-        timeET: "4:10 PM ET",
-        away: "LAD",
-        home: "SFG",
-        pick: "LAD",
-        why: [
-          "Top of lineup gets on base",
-          "Platoon matchups look favorable"
-        ],
-        final: "LAD 6, SFG 2",
-        notes: [
-          "Early runs, then coasted",
-          "Bullpen clean finish"
-        ]
-      }
-    ];
 
     const listEl = document.getElementById("list");
     const qEl = document.getElementById("q");
     const countEl = document.getElementById("count");
 
-    function sortNewestFirst(arr){
-      return arr.slice().sort((a,b) => {
-        const da = parseGameDateTime(a.date, a.timeET).getTime();
-        const db = parseGameDateTime(b.date, b.timeET).getTime();
-        return db - da;
-      });
-    }
-
-    function render(items){
+    function render(items, picks){
       listEl.innerHTML = "";
+
       items.forEach(g => {
+        const pk = String(g.gamePk || "");
+        const entry = picks?.[pk] || {};
+        const pick = entry?.pick || "TBD";
+        const why = Array.isArray(entry?.why) ? entry.why : [];
+        const notes = Array.isArray(entry?.notes) ? entry.notes : [];
+
         const awayLogo = logoUrl(g.away);
         const homeLogo = logoUrl(g.home);
+        const dt = fmtDateTimeET(g.gameDate);
 
         const card = document.createElement("article");
         card.className = "card";
         card.innerHTML = `
           <div class="cardHead">
             <div class="meta">
-              <div class="date">${fmtDate(g.date)}  •  ${g.timeET || ""}</div>
+              <div class="date">${dt.date}  •  ${dt.time}</div>
               <div class="match">${g.away} @ ${g.home}</div>
             </div>
-            <div class="tag">Final: <strong>${g.final || "TBD"}</strong></div>
+            <div class="tag">Final: <strong>${g.final}</strong></div>
           </div>
 
           <div class="cardBody">
@@ -342,14 +320,22 @@
             <div class="split">
               <div class="box">
                 <p class="boxTitle">Your pick</p>
-                <p class="big">${g.pick}</p>
-                <ul>${(g.why || []).map(x => `<li>${x}</li>`).join("")}</ul>
+                <p class="big">${pick}</p>
+                ${
+                  why.length
+                    ? `<ul>${why.map(x => `<li>${x}</li>`).join("")}</ul>`
+                    : `<div class="muted" style="font-size:13px;line-height:1.45">No pick logged. Add gamePk <strong>${pk}</strong> to picks.json</div>`
+                }
               </div>
 
               <div class="box">
                 <p class="boxTitle">Outcome notes</p>
-                <p class="big">${g.final || "TBD"}</p>
-                <ul>${(g.notes || []).map(x => `<li>${x}</li>`).join("")}</ul>
+                <p class="big">${g.final}</p>
+                ${
+                  notes.length
+                    ? `<ul>${notes.map(x => `<li>${x}</li>`).join("")}</ul>`
+                    : `<div class="muted" style="font-size:13px;line-height:1.45">No notes yet. Add a couple bullets in picks.json if you want.</div>`
+                }
               </div>
             </div>
           </div>
@@ -365,25 +351,45 @@
         });
       });
 
-      countEl.textContent = `${items.length} entr${items.length === 1 ? "y" : "ies"}`;
+      countEl.textContent = `${items.length} final${items.length === 1 ? "" : "s"}`;
     }
 
-    function applyFilter(){
+    function applySearch(items, picks){
       const q = (qEl.value || "").trim().toUpperCase();
-      let items = sortNewestFirst(RESULTS);
-
-      if(q){
-        items = items.filter(g => {
-          const hay = `${g.date} ${g.timeET || ""} ${g.away} ${g.home} ${g.pick} ${g.final || ""} ${(g.why||[]).join(" ")} ${(g.notes||[]).join(" ")}`.toUpperCase();
-          return hay.includes(q);
-        });
-      }
-
-      render(items);
+      if(!q) return items;
+      return items.filter(g => {
+        const pk = String(g.gamePk || "");
+        const entry = picks?.[pk] || {};
+        const hay = `${pk} ${g.away} ${g.home} ${g.final} ${(entry.pick||"")} ${(entry.why||[]).join(" ")} ${(entry.notes||[]).join(" ")}`.toUpperCase();
+        return hay.includes(q);
+      });
     }
 
-    qEl.addEventListener("input", applyFilter);
-    applyFilter();
+    async function boot(){
+      try{
+        const [scheduleJson, picks] = await Promise.all([fetchSchedule2026WithLinescore(), fetchPicks()]);
+        const finals = flattenFinalGames(scheduleJson);
+
+        function rerender(){
+          const filtered = applySearch(finals, picks);
+          render(filtered, picks);
+        }
+
+        qEl.addEventListener("input", rerender);
+        rerender();
+      }catch(err){
+        listEl.innerHTML = `
+          <div class="card" style="grid-column: span 12; padding:14px">
+            <div style="font-weight:700;margin-bottom:6px">Could not load results</div>
+            <div class="muted" style="font-size:13px;line-height:1.45">
+              ${String(err?.message || err)}
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    boot();
   </script>
 </body>
 </html>
