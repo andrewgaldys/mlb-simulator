@@ -17,11 +17,10 @@
   @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 
-.header { background: linear-gradient(180deg, #ffffff 0%, #eef2f7 100%); border-bottom: 1px solid #d0dce8; padding: 28px 20px 22px; text-align: center; }
+  .header { background: linear-gradient(180deg, #ffffff 0%, #eef2f7 100%); border-bottom: 1px solid #d0dce8; padding: 28px 20px 22px; text-align: center; }
   .header-sub { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #6b8299; margin-bottom: 8px; font-weight: 700; }
   .header h1 { font-family: 'Archivo Black', sans-serif; font-size: clamp(22px, 5vw, 36px); color: #0d1f2d; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 6px; }
   .header p { color: #5a7a9a; font-size: 13px; max-width: 500px; margin: 0 auto; }
-
 
   .container { max-width: 900px; margin: 0 auto; padding: 20px 16px; }
 
@@ -54,20 +53,21 @@
   .ci-sigma { opacity: 0.6; }
 
   .playoff-badge { padding: 3px 8px; border-radius: 6px; font-weight: 700; font-size: 12px; }
-  .playoff-high { background: #0f4c2a; color: #4ade80; }
-  .playoff-mid { background: #2a3a1e; color: #a3c45a; }
-  .playoff-low { background: #1a1a24; color: #6b8299; }
+  /* FIX: Light-theme playoff badges (were dark green/gray before) */
+  .playoff-high { background: #e0f5ea; color: #0f6a38; border: 1px solid #b0dcc0; }
+  .playoff-mid { background: #f0f5e0; color: #5a7a20; border: 1px solid #d0dca0; }
+  .playoff-low { background: #f0f2f5; color: #6b8299; border: 1px solid #d0dce8; }
 
-  .div-pct { text-align: center; color: #8ba3bd; font-weight: 500; }
-  .ws-hot { font-weight: 700; color: #f0c040; font-size: 13px; }
-  .ws-cold { font-weight: 700; color: #4a5a6a; font-size: 12px; }
+  /* FIX: Light-theme colors for Div% and WS% */
+  .div-pct { text-align: center; color: #4a6a8a; font-weight: 500; }
+  .ws-hot { font-weight: 700; color: #b08000; font-size: 13px; }
+  .ws-cold { font-weight: 700; color: #8ba3bd; font-size: 12px; }
 
   .tooltip-wrap { position: relative; display: inline-flex; align-items: center; gap: 3px; cursor: help; }
   .tooltip-icon { font-size: 8px; opacity: 0.6; line-height: 1; }
   .tooltip-box { position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: #162232; border: 1px solid #2a4a6a; border-radius: 8px; padding: 10px 13px; font-size: 11px; font-weight: 400; color: #a0b8d0; width: 220px; z-index: 100; text-transform: none; letter-spacing: 0; line-height: 1.5; box-shadow: 0 8px 24px rgba(0,0,0,0.5); pointer-events: none; display: none; }
   .tooltip-wrap:hover .tooltip-box { display: block; }
   .tooltip-arrow { position: absolute; top: -5px; left: 50%; transform: translateX(-50%) rotate(45deg); width: 8px; height: 8px; background: #162232; border-left: 1px solid #2a4a6a; border-top: 1px solid #2a4a6a; }
-
 
   .stat-card { display: flex; gap: 12px; padding: 10px 14px; background: #f5f7fa; border-radius: 8px; border: 1px solid #d0dce8; margin-bottom: 8px; }
   .stat-icon { font-size: 20px; flex-shrink: 0; }
@@ -87,12 +87,35 @@
 
   .section-label { font-size: 10px; color: #4a6a8a; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
 
- .footer { text-align: center; padding: 32px 0 20px; font-size: 11px; color: #8ba3bd; line-height: 1.8; }
+  .footer { text-align: center; padding: 32px 0 20px; font-size: 11px; color: #8ba3bd; line-height: 1.8; }
 
   .dist-bar { display: flex; align-items: flex-end; height: 40px; gap: 1px; opacity: 0.85; }
   .dist-tick { width: 3px; border-radius: 1px 1px 0 0; transition: height 0.3s ease; min-height: 1px; }
 
   .hidden { display: none; }
+
+  /* NEW: Search bar */
+  .search-bar { width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid #d0dce8; background: #ffffff; font-size: 13px; font-family: 'DM Sans', sans-serif; color: #1a2a3a; margin-bottom: 16px; outline: none; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+  .search-bar:focus { border-color: #4a8abf; box-shadow: 0 0 0 3px rgba(74,138,191,0.15); }
+  .search-bar::placeholder { color: #8ba3bd; }
+
+  /* NEW: Mobile-friendly */
+  @media (max-width: 700px) {
+    .col-headers, .team-row {
+      grid-template-columns: 1.5fr 0.6fr 0.8fr 0.8fr 0.8fr;
+    }
+    .col-headers > div:nth-child(2),
+    .col-headers > div:nth-child(4),
+    .team-row > div:nth-child(2),
+    .team-row > div:nth-child(4) {
+      display: none;
+    }
+    .team-name { display: none; }
+    .controls { flex-direction: column; align-items: stretch; }
+    .controls > div:last-child { margin-left: 0; justify-content: center; }
+    .header h1 { font-size: 22px; }
+    .search-bar { font-size: 16px; }
+  }
 </style>
 </head>
 <body>
@@ -123,7 +146,8 @@
     </div>
   </div>
 
-  <!-- Adjustment Panel (hidden by default) -->
+  <!-- NEW: Search bar -->
+  <input type="text" class="search-bar" id="teamSearch" placeholder="🔍 Search for a team (e.g. Yankees, LAD, Cubs...)" oninput="filterTeams(this.value)">
 
   <!-- Stat Guide -->
   <div class="panel" style="margin-bottom:16px">
@@ -133,7 +157,8 @@
     </button>
     <div id="statGuide" class="hidden" style="padding:16px 20px">
       <p style="color:#6b8299;font-size:12px;margin-bottom:14px;line-height:1.6">
-        Every number on this page comes from running the full 162-game MLB season + playoffs <strong style="color:#c0d0e0">thousands of times</strong> using random simulation. Here's what each column means:
+        <!-- FIX: was #c0d0e0, invisible on light background -->
+        Every number on this page comes from running the full 162-game MLB season + playoffs <strong style="color:#0d1f2d">thousands of times</strong> using random simulation. Here's what each column means:
       </p>
       <div class="stat-card"><span class="stat-icon">📊</span><div><div class="stat-name">Win Distribution</div><div class="stat-desc">A histogram (bar chart) of every simulated win total. Each tiny bar is a possible outcome — taller bars happened more often. A wide spread means lots of uncertainty; a tight cluster means we're confident.</div></div></div>
       <div class="stat-card"><span class="stat-icon">🎯</span><div><div class="stat-name">Avg W (Average Wins)</div><div class="stat-desc">The expected value — add up all simulated win totals and divide by the number of simulations. This is the best single-number prediction for the team's season.</div></div></div>
@@ -150,23 +175,25 @@
       <span>📐 The Math Behind This Simulator</span>
       <span style="font-size:18px;transition:transform 0.2s">▾</span>
     </button>
-    <div id="mathExplainer" class="hidden" style="padding:18px 20px;color:#8ba3bd;font-size:13px;line-height:1.8">
+    <!-- FIX: text color was #8ba3bd (too faint), now #4a6a8a -->
+    <div id="mathExplainer" class="hidden" style="padding:18px 20px;color:#4a6a8a;font-size:13px;line-height:1.8">
       <div style="margin-bottom:16px">
-        <span style="color:#e8ecf1;font-weight:700;font-size:14px">1. Win Probability (Bernoulli Trials)</span>
+        <!-- FIX: all 4 headings were #e8ecf1 (invisible on white), now #0d1f2d -->
+        <span style="color:#0d1f2d;font-weight:700;font-size:14px">1. Win Probability (Bernoulli Trials)</span>
         <p style="margin:6px 0">Each of the 162 games is modeled as a <em>Bernoulli trial</em> — a random event with two outcomes (win or loss). If a team has a projected win rate of 0.556 (90 wins / 162 games), then each game is like flipping a weighted coin that lands "win" 55.6% of the time.</p>
       </div>
       <div style="margin-bottom:16px">
-        <span style="color:#e8ecf1;font-weight:700;font-size:14px">2. Log5 Formula (Playoff Matchups)</span>
+        <span style="color:#0d1f2d;font-weight:700;font-size:14px">2. Log5 Formula (Playoff Matchups)</span>
         <p style="margin:6px 0">To determine who wins each playoff game, we use Bill James' <em>Log5</em> formula:</p>
         <div class="formula-box">P(A beats B) = (pA − pA×pB) / (pA + pB − 2×pA×pB)</div>
         <p style="margin:6px 0">This elegantly adjusts each team's strength relative to their opponent. A .600 team vs a .400 team wins ~69.2% of the time, not 60%.</p>
       </div>
       <div style="margin-bottom:16px">
-        <span style="color:#e8ecf1;font-weight:700;font-size:14px">3. Monte Carlo Method</span>
+        <span style="color:#0d1f2d;font-weight:700;font-size:14px">3. Monte Carlo Method</span>
         <p style="margin:6px 0">We repeat the entire season + playoffs <strong>thousands</strong> of times, using random numbers each time. By counting outcomes across all simulations, we get probability estimates — like "the Dodgers won the World Series in 2,340 out of 10,000 sims = 23.4% WS odds." More simulations = more precise estimates.</p>
       </div>
       <div style="margin-bottom:16px">
-        <span style="color:#e8ecf1;font-weight:700;font-size:14px">4. Standard Deviation & Confidence Intervals</span>
+        <span style="color:#0d1f2d;font-weight:700;font-size:14px">4. Standard Deviation & Confidence Intervals</span>
         <p style="margin:6px 0">The <em>standard deviation</em> (σ) tells us how much outcomes vary across simulations. The <em>90% confidence interval</em> (5th to 95th percentile) shows the range where 90% of simulated seasons land. A team projected for 85 wins with a CI of 74–96 means there's huge uncertainty — that's the beauty of simulation over a single number.</p>
       </div>
       <div class="callout">
@@ -177,15 +204,17 @@
 
   <!-- Data Sources -->
   <div class="panel" style="padding:18px 20px;margin-bottom:20px">
-    <div style="font-family:'Archivo Black',sans-serif;font-size:12px;color:#c0d0e0;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px">📋 Data Sources & Methodology</div>
+    <!-- FIX: was #c0d0e0, now #1a3a5a -->
+    <div style="font-family:'Archivo Black',sans-serif;font-size:12px;color:#1a3a5a;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px">📋 Data Sources & Methodology</div>
     <div style="color:#6b8299;font-size:12px;line-height:1.7">
-      <p style="margin-bottom:10px"><strong style="color:#8ba3bd">Projected win totals</strong> are a composite average of multiple respected projection systems, sourced in February 2026:</p>
+      <!-- FIX: both strongs were #8ba3bd, now #1a3a5a -->
+      <p style="margin-bottom:10px"><strong style="color:#1a3a5a">Projected win totals</strong> are a composite average of multiple respected projection systems, sourced in February 2026:</p>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin-bottom:12px">
         <div class="source-card"><div class="source-name">FanGraphs Depth Charts</div><div class="source-desc">Combines Steamer + ZiPS projections with roster depth</div><div class="source-url">fangraphs.com</div></div>
         <div class="source-card"><div class="source-name">Baseball Prospectus PECOTA</div><div class="source-desc">Player-level projection system using comparable players</div><div class="source-url">baseballprospectus.com</div></div>
         <div class="source-card"><div class="source-name">Betting Market Consensus</div><div class="source-desc">Oddsmakers' over/under win totals (BetMGM, FanDuel, etc.)</div></div>
       </div>
-      <p style="margin-bottom:8px"><strong style="color:#8ba3bd">Simulation method:</strong> Each team's projected wins are converted to a win probability (wins ÷ 162). Every game in the 162-game season is then simulated as a Bernoulli trial (weighted coin flip). Playoff matchups use the Log5 formula to calculate head-to-head probabilities. The entire season + playoffs are repeated thousands of times.</p>
+      <p style="margin-bottom:8px"><strong style="color:#1a3a5a">Simulation method:</strong> Each team's projected wins are converted to a win probability (wins ÷ 162). Every game in the 162-game season is then simulated as a Bernoulli trial (weighted coin flip). Playoff matchups use the Log5 formula to calculate head-to-head probabilities. The entire season + playoffs are repeated thousands of times.</p>
       <div class="disclaimer"><strong>Disclaimer:</strong> This is an independent mathematical simulation for educational purposes. It is not affiliated with MLB, FanGraphs, or any sportsbook. Projections are estimates and should not be used for gambling decisions.</div>
     </div>
   </div>
@@ -207,19 +236,9 @@
  * ============================================================
  *  MLB 2026 MONTE CARLO SEASON SIMULATOR — Pure JavaScript
  * ============================================================
- *  Math concepts used:
- *    1. Win Probability  – Each game = Bernoulli trial (weighted coin flip)
- *    2. Log5 Formula     – Bill James' head-to-head win probability
- *    3. Monte Carlo Sim  – Repeat season thousands of times
- *    4. Expected Value   – Average projected wins across all sims
- *    5. Standard Deviation – Spread / uncertainty of outcomes
- *    6. Confidence Intervals – Range where 90% of outcomes fall
- * ============================================================
  */
 
 // ── TEAM DATA ──
-// Source: composite of FanGraphs Depth Charts, Baseball Prospectus PECOTA,
-// and betting market consensus as of February 2026.
 const TEAMS_DATA = {
   "AL East": [
     { name: "New York Yankees",    abbr: "NYY", wins: 91, color: "#003087" },
@@ -270,22 +289,19 @@ const NL_DIVS = ["NL East", "NL Central", "NL West"];
 
 const COLUMN_TOOLTIPS = {
   team: "Each team ranked by projected wins within their division. The colored circle shows their rank.",
-  dist: "A mini bar chart showing how many wins the team got across all simulations. Wider spread = more uncertainty. Hover individual bars for exact percentages.",
+  dist: "A mini bar chart showing how many wins the team got across all simulations. Wider spread = more uncertainty.",
   avgW: "The average (expected value) of wins across all simulations. This is the single best prediction for how many games this team will win.",
-  ci: "The 90% Confidence Interval — in 90% of simulations, the team's wins fell within this range. σ (sigma) is the standard deviation, measuring how spread out the results are.",
-  playoff: "% of simulations where this team made the postseason (3 division winners + 3 wild cards per league = 6 playoff teams per league).",
-  div: "% of simulations where this team finished 1st in their division. Always ≤ Playoff % since wild card teams also make playoffs.",
-  ws: "% of simulations where this team won the World Series. Even dominant teams rarely exceed ~25% because playoff series are short and unpredictable.",
+  ci: "The 90% Confidence Interval — in 90% of simulations, the team's wins fell within this range. σ (sigma) is the standard deviation.",
+  playoff: "% of simulations where this team made the postseason (3 division winners + 3 wild cards per league).",
+  div: "% of simulations where this team finished 1st in their division. Always ≤ Playoff %.",
+  ws: "% of simulations where this team won the World Series. Even dominant teams rarely exceed ~25%.",
 };
 
 // ── STATE ──
 let currentResults = null;
 let viewMode = "division";
 
-// ── MATH HELPERS ──
-
-/** Log5: probability Team A (win% pA) beats Team B (win% pB). By Bill James. */
- // MLB team ID map for logo URLs
+// ── TEAM LOGO IDS ──
 const TEAM_IDS = {
   NYY:147, TOR:141, BAL:110, TBR:139, BOS:111,
   DET:116, MIN:142, CLE:114, KCR:118, CHW:145,
@@ -295,11 +311,13 @@ const TEAM_IDS = {
   LAD:119, ARI:109, SFG:137, SDP:135, COL:115,
 };
 function getTeamId(abbr) { return TEAM_IDS[abbr] || ''; }
+
+// ── MATH HELPERS ──
+
 function log5(pA, pB) {
   return (pA - pA * pB) / (pA + pB - 2 * pA * pB);
 }
 
-/** Standard deviation: measures spread of results. Higher = more uncertainty. */
 function standardDeviation(arr) {
   const n = arr.length;
   if (n === 0) return 0;
@@ -308,7 +326,6 @@ function standardDeviation(arr) {
   return Math.sqrt(sqDiffs.reduce((a, b) => a + b, 0) / n);
 }
 
-/** Percentile: value below which p% of data falls. Used for confidence intervals. */
 function percentile(arr, p) {
   const sorted = [...arr].sort((a, b) => a - b);
   const idx = (p / 100) * (sorted.length - 1);
@@ -320,14 +337,14 @@ function percentile(arr, p) {
 
 // ── SIMULATION ENGINE ──
 
-function runSimulation(teamsData, numSims) {  
+function runSimulation(teamsData, numSims) {
   const allTeams = [];
   const divisionMap = {};
 
   for (const [div, teams] of Object.entries(teamsData)) {
     for (const t of teams) {
       const wp = t.wins / 162;
-allTeams.push({ ...t, wp, division: div });
+      allTeams.push({ ...t, wp, division: div });
       if (!divisionMap[div]) divisionMap[div] = [];
       divisionMap[div].push(t.abbr);
     }
@@ -451,7 +468,11 @@ function makeTeamRowHTML(team, numSims, rank) {
   return `<div class="team-row">
     <div style="display:flex;align-items:center;gap:10px">
       <span class="rank-badge" style="background:${team.color}">${rank}</span>
-<div style="display:flex;align-items:center;gap:8px"><img src="https://www.mlbstatic.com/team-logos/${getTeamId(team.abbr)}.svg" width="24" height="24" style="object-fit:contain;flex-shrink:0" onerror="this.style.display='none'"><div><span class="team-abbr">${team.abbr}</span><span class="team-name">${team.name}</span></div></div>    </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <img src="https://www.mlbstatic.com/team-logos/${getTeamId(team.abbr)}.svg" width="24" height="24" style="object-fit:contain;flex-shrink:0" onerror="this.style.display='none'">
+        <div><span class="team-abbr">${team.abbr}</span><span class="team-name">${team.name}</span></div>
+      </div>
+    </div>
     ${makeDistHTML(team.simWins, team.color, numSims)}
     <div class="avg-wins">${avg}</div>
     <div class="ci-cell">${p5}–${p95} <span class="ci-sigma">(σ=${sd})</span></div>
@@ -461,11 +482,60 @@ function makeTeamRowHTML(team, numSims, rank) {
   </div>`;
 }
 
+// NEW: Top Takeaways — auto-generates key insights after each simulation
+function renderTakeaways(results, numSims) {
+  const teams = Object.values(results);
+
+  // WS favorite
+  const wsFav = teams.reduce((a, b) => a.wsWins > b.wsWins ? a : b);
+  const wsPct = ((wsFav.wsWins / numSims) * 100).toFixed(1);
+
+  // Best average wins
+  const bestAvg = teams.reduce((a, b) => {
+    const avgA = a.simWins.reduce((s,v) => s+v, 0) / a.simWins.length;
+    const avgB = b.simWins.reduce((s,v) => s+v, 0) / b.simWins.length;
+    return avgA > avgB ? a : b;
+  });
+  const bestAvgWins = (bestAvg.simWins.reduce((a,b) => a+b, 0) / bestAvg.simWins.length).toFixed(0);
+
+  // Tightest division (smallest gap between 1st and 3rd)
+  let tightestDiv = '', tightestGap = 999;
+  for (const [div, divTeams] of Object.entries(TEAMS_DATA)) {
+    const avgs = divTeams.map(t =>
+      results[t.abbr].simWins.reduce((a,b) => a+b, 0) / results[t.abbr].simWins.length
+    ).sort((a,b) => b - a);
+    const gap = avgs[0] - avgs[2];
+    if (gap < tightestGap) { tightestGap = gap; tightestDiv = div; }
+  }
+
+  // Dark horse — projected ≤80 wins but decent playoff odds
+  const underdogs = teams
+    .filter(t => t.wins <= 80 && (t.playoffApps / numSims) > 0.15)
+    .sort((a,b) => (b.playoffApps/numSims) - (a.playoffApps/numSims));
+  const darkHorse = underdogs.length > 0 ? underdogs[0] : null;
+
+  let html = `<div class="panel" style="padding:16px 20px;margin-bottom:16px">
+    <div style="font-family:'Archivo Black',sans-serif;font-size:12px;color:#1a3a5a;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px">⚡ Key Takeaways</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px">
+      <div class="source-card"><div class="source-name">🏆 WS Favorite</div><div class="source-desc">${wsFav.name} (${wsPct}% chance)</div></div>
+      <div class="source-card"><div class="source-name">📈 Most Projected Wins</div><div class="source-desc">${bestAvg.name} (~${bestAvgWins} W)</div></div>
+      <div class="source-card"><div class="source-name">🔥 Tightest Division</div><div class="source-desc">${tightestDiv} (top 3 within ${tightestGap.toFixed(0)} wins)</div></div>`;
+  if (darkHorse) {
+    const dhPct = ((darkHorse.playoffApps / numSims) * 100).toFixed(0);
+    html += `<div class="source-card"><div class="source-name">🐴 Dark Horse</div><div class="source-desc">${darkHorse.name} (${dhPct}% playoff odds despite ${darkHorse.wins}W projection)</div></div>`;
+  }
+  html += `</div></div>`;
+  return html;
+}
+
 function renderResults() {
   if (!currentResults) return;
   const numSims = parseInt(document.getElementById('simSelect').value);
   const container = document.getElementById('results');
   let html = '<div style="animation:fadeUp 0.4s ease">';
+
+  // NEW: Show takeaways at the top
+  html += renderTakeaways(currentResults, numSims);
 
   if (viewMode === 'division') {
     html += '<div class="section-label">American League</div>';
@@ -515,16 +585,22 @@ function handleRun() {
   btn.textContent = '⏳ Simulating...';
 
   setTimeout(() => {
-currentResults = runSimulation(TEAMS_DATA, numSims);
+    currentResults = runSimulation(TEAMS_DATA, numSims);
     renderResults();
     btn.disabled = false;
     btn.textContent = '▶ Run Simulation';
   }, 50);
 }
 
-
-
-
+// NEW: Search filter — hides rows that don't match your query
+function filterTeams(query) {
+  const q = query.toLowerCase().trim();
+  const rows = document.querySelectorAll('.team-row');
+  rows.forEach(row => {
+    const text = row.textContent.toLowerCase();
+    row.style.display = q === '' || text.includes(q) ? '' : 'none';
+  });
+}
 
 function setView(mode) {
   viewMode = mode;
