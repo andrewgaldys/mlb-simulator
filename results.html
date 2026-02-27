@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MLB 2026 Picks Journal | Results</title>
-  <meta name="description" content="Finished MLB games with your pick and the final score." />
+  <title>MLB 2026 | Results</title>
+  <meta name="description" content="Final MLB games in 2026 with picks and final scores." />
   <style>
     :root{
       --bg0:#ffffff;
@@ -27,8 +27,14 @@
         radial-gradient(900px 500px at 85% 20%, rgba(0,0,0,.04), transparent 55%),
         linear-gradient(180deg, var(--bg0), var(--bg1));
     }
+
     .wrap{max-width:1100px;margin:0 auto;padding:28px 18px 40px}
-    header{display:flex;gap:14px;align-items:center;justify-content:space-between;padding:14px 14px 18px}
+
+    header{
+      display:flex;gap:14px;align-items:center;justify-content:space-between;
+      padding:14px 14px 18px;
+    }
+
     .brand{display:flex;gap:12px;align-items:center}
     .mark{
       width:38px;height:38px;border-radius:12px;
@@ -36,11 +42,19 @@
       border:1px solid var(--stroke);
       box-shadow: 0 10px 24px rgba(0,0,0,.08);
     }
+
+    .titleBlock{display:flex;flex-direction:column;gap:4px}
     h1{font-size:18px;margin:0;letter-spacing:.2px}
-    .sub{font-size:12.5px;color:var(--muted);margin-top:2px}
+    .sub{
+      font-size:12.5px;color:var(--muted);
+      margin:0;
+    }
+    .sub a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(0,0,0,.18)}
+    .sub a:hover{border-bottom-color:rgba(0,0,0,.35)}
+
     nav{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
     .pill{
-      display:inline-flex;align-items:center;gap:8px;
+      display:inline-flex;align-items:center;
       padding:10px 12px;border-radius:999px;
       border:1px solid var(--stroke);
       background:rgba(255,255,255,.55);
@@ -51,22 +65,35 @@
       font-size:13px;
     }
     .pill.active{background:rgba(0,0,0,.07)}
-    .pill small{color:var(--muted);font-size:12px}
 
-    .topbar{
+    .controls{
       display:flex;gap:10px;align-items:center;justify-content:space-between;
-      padding:0 14px 18px;flex-wrap:wrap;
+      padding:0 14px 18px;
+      flex-wrap:wrap;
     }
-    .search{
-      flex:1;display:flex;gap:10px;align-items:center;max-width:560px;
-      padding:12px 12px;border-radius:999px;
+
+    .filterGroup{
+      display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+    }
+
+    .selectWrap{
+      display:flex;align-items:center;gap:10px;
+      padding:10px 12px;border-radius:999px;
       border:1px solid var(--stroke);
       background:rgba(255,255,255,.55);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       box-shadow: 0 14px 34px rgba(0,0,0,.06);
     }
-    .search input{width:100%;border:0;outline:0;background:transparent;font-size:13.5px;color:var(--text)}
+
+    .label{font-size:12.5px;color:var(--muted);white-space:nowrap}
+    select{
+      border:0;outline:0;background:transparent;
+      font-size:13.5px;color:var(--text);
+      padding:2px 0;
+      max-width:220px;
+    }
+
     .hint{font-size:12.5px;color:var(--muted);white-space:nowrap}
 
     .grid{
@@ -75,6 +102,7 @@
       gap:12px;
       padding:0 14px;
     }
+
     .card{
       grid-column: span 6;
       border-radius:var(--radius);
@@ -93,9 +121,11 @@
       border-bottom:1px solid rgba(0,0,0,.06);
       background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.28));
     }
+
     .meta{display:flex;flex-direction:column;gap:4px}
     .meta .date{font-size:12.5px;color:var(--muted)}
     .meta .match{font-size:14.5px;font-weight:650;letter-spacing:.2px}
+
     .tag{
       padding:8px 10px;border-radius:999px;
       border:1px solid rgba(0,0,0,.10);
@@ -105,7 +135,11 @@
     }
 
     .cardBody{padding:12px 14px 14px}
-    .teams{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+
+    .teams{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      margin-bottom:10px;
+    }
     .team{display:flex;align-items:center;gap:10px;min-width:0}
     .logo{
       width:34px;height:34px;border-radius:12px;
@@ -135,11 +169,32 @@
       padding:10px 12px;border-radius:14px;
       border:1px solid rgba(0,0,0,.08);
       background:rgba(255,255,255,.50);
+      font-size:13px;
+      color:rgba(0,0,0,.75);
     }
-    .boxTitle{font-size:12px;color:var(--muted);margin:0 0 6px;letter-spacing:.25px;text-transform:uppercase}
-    .big{font-size:14px;font-weight:750;letter-spacing:.2px;margin:0 0 6px}
-    ul{margin:0;padding-left:16px;color:rgba(0,0,0,.75);font-size:13px;line-height:1.45}
-    .muted{color:var(--muted)}
+    .boxTitle{
+      font-size:12px;color:var(--muted);
+      margin:0 0 6px;
+      letter-spacing:.25px;text-transform:uppercase;
+    }
+    .big{
+      font-size:14px;font-weight:750;letter-spacing:.2px;margin:0;
+      color:rgba(0,0,0,.90);
+    }
+
+    .empty{
+      grid-column: span 12;
+      border-radius:var(--radius);
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.55);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 14px 34px rgba(0,0,0,.06);
+      padding:14px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+    }
   </style>
 </head>
 
@@ -148,22 +203,40 @@
     <header>
       <div class="brand">
         <div class="mark" aria-hidden="true"></div>
-        <div>
-          <h1>MLB 2026 Picks Journal</h1>
-          <div class="sub">Final scores show up automatically after games end</div>
+        <div class="titleBlock">
+          <h1>MLB 2026</h1>
+          <p class="sub">
+            Picks from
+            <a href="https://www.linkedin.com/in/andrewgaldys/" target="_blank" rel="noopener noreferrer">Andrew Galdys</a>
+            and
+            <a href="https://www.linkedin.com/in/jordan-mongitore-524b84381/" target="_blank" rel="noopener noreferrer">Jordan Mongitore</a>.
+          </p>
         </div>
       </div>
+
       <nav>
-        <a class="pill" href="./index.html">Upcoming <small>2026</small></a>
-        <a class="pill active" href="./results.html">Results <small>Journal</small></a>
+        <a class="pill" href="./index.html">Upcoming</a>
+        <a class="pill active" href="./results.html">Results</a>
       </nav>
     </header>
 
-    <div class="topbar">
-      <div class="search" role="search">
-        <span class="muted" aria-hidden="true">Search</span>
-        <input id="q" type="search" placeholder="Try: NYY, LAD, final, 746123..." autocomplete="off" />
+    <div class="controls">
+      <div class="filterGroup">
+        <div class="selectWrap">
+          <span class="label">Team</span>
+          <select id="teamFilter" aria-label="Filter by team">
+            <option value="ALL">All</option>
+          </select>
+        </div>
+
+        <div class="selectWrap">
+          <span class="label">Date</span>
+          <select id="dateFilter" aria-label="Filter by date">
+            <option value="ALL">All</option>
+          </select>
+        </div>
       </div>
+
       <div class="hint" id="count"></div>
     </div>
 
@@ -171,22 +244,17 @@
   </div>
 
   <script>
-    const TEAM = {
-      ARI:{id:109}, ATL:{id:144}, BAL:{id:110}, BOS:{id:111}, CHC:{id:112},
-      CWS:{id:145}, CIN:{id:113}, CLE:{id:114}, COL:{id:115}, DET:{id:116},
-      HOU:{id:117}, KCR:{id:118}, LAA:{id:108}, LAD:{id:119}, MIA:{id:146},
-      MIL:{id:158}, MIN:{id:142}, NYM:{id:121}, NYY:{id:147}, OAK:{id:133},
-      PHI:{id:143}, PIT:{id:134}, SDP:{id:135}, SEA:{id:136}, SFG:{id:137},
-      STL:{id:138}, TBR:{id:139}, TEX:{id:140}, TOR:{id:141}, WSN:{id:120}
-    };
+    const START = new Date("2026-02-28T00:00:00Z");
+    const END   = new Date("2026-12-31T23:59:59Z");
+    const TZ = "America/New_York";
 
-    function logoUrl(abbr){
-      const t = TEAM[abbr];
-      if(!t) return null;
-      return `https://www.mlbstatic.com/team-logos/team-cap-on-light/${t.id}.svg`;
+    function logoUrlByTeamId(teamId){
+      if(!teamId) return null;
+      return `https://www.mlbstatic.com/team-logos/team-cap-on-light/${teamId}.svg`;
     }
 
     function logoFallbackHTML(abbr){
+      const safe = (abbr || "").slice(0,4);
       return `
         <div style="
           width:26px;height:26px;border-radius:10px;
@@ -195,19 +263,24 @@
           color:rgba(0,0,0,.72);
           background:rgba(0,0,0,.04);
           border:1px solid rgba(0,0,0,.10);
-        ">${abbr}</div>
+        ">${safe || "TBD"}</div>
       `;
     }
 
-    const START = new Date("2026-02-28T00:00:00Z");
-    const END   = new Date("2026-12-31T23:59:59Z");
-    const TZ = "America/New_York";
-
     function fmtDateTimeET(iso){
       const d = new Date(iso);
-      const date = new Intl.DateTimeFormat(undefined, { timeZone: TZ, weekday:"short", month:"short", day:"numeric", year:"numeric" }).format(d);
-      const time = new Intl.DateTimeFormat(undefined, { timeZone: TZ, hour:"numeric", minute:"2-digit" }).format(d);
+      const date = new Intl.DateTimeFormat(undefined, {
+        timeZone: TZ, weekday:"short", month:"short", day:"numeric", year:"numeric"
+      }).format(d);
+      const time = new Intl.DateTimeFormat(undefined, {
+        timeZone: TZ, hour:"numeric", minute:"2-digit"
+      }).format(d);
       return { date, time: `${time} ET` };
+    }
+
+    function dayKeyET(iso){
+      const d = new Date(iso);
+      return new Intl.DateTimeFormat("en-CA", { timeZone: TZ, year:"numeric", month:"2-digit", day:"2-digit" }).format(d);
     }
 
     async function fetchSchedule2026WithLinescore(){
@@ -215,9 +288,7 @@
       url.searchParams.set("sportId", "1");
       url.searchParams.set("startDate", "2026-02-28");
       url.searchParams.set("endDate", "2026-12-31");
-      // linescore hydration is commonly used to get runs.  [oai_citation:6‡Reddit](https://www.reddit.com/r/mlbdata/comments/i23k4v/help_with_using_statsapi_to_print_upcoming_game/?utm_source=chatgpt.com)
       url.searchParams.set("hydrate", "team,linescore");
-
       const res = await fetch(url.toString());
       if(!res.ok) throw new Error(`Schedule fetch failed (${res.status})`);
       return res.json();
@@ -229,7 +300,7 @@
       return res.json();
     }
 
-    function flattenFinalGames(json){
+    function flattenFinals(json){
       const out = [];
       const dates = Array.isArray(json?.dates) ? json.dates : [];
       for(const day of dates){
@@ -237,13 +308,11 @@
         for(const g of games){
           const gameDate = g?.gameDate;
           if(!gameDate) continue;
-
           const dt = new Date(gameDate);
           if(dt < START || dt > END) continue;
 
-          const status = g?.status?.detailedState || "";
-          const isFinal = String(status).toLowerCase().includes("final");
-          if(!isFinal) continue;
+          const status = String(g?.status?.detailedState || "").toLowerCase();
+          if(!status.includes("final")) continue;
 
           const awayTeam = g?.teams?.away?.team || {};
           const homeTeam = g?.teams?.home?.team || {};
@@ -253,38 +322,83 @@
           const awayRuns = g?.teams?.away?.score;
           const homeRuns = g?.teams?.home?.score;
 
+          const finalText = (Number.isFinite(awayRuns) && Number.isFinite(homeRuns))
+            ? `${awayAbbr} ${awayRuns}, ${homeAbbr} ${homeRuns}`
+            : "Final";
+
           out.push({
             gamePk: g?.gamePk,
             gameDate,
-            away: awayAbbr,
-            home: homeAbbr,
-            final: (Number.isFinite(awayRuns) && Number.isFinite(homeRuns))
-              ? `${awayAbbr} ${awayRuns}, ${homeAbbr} ${homeRuns}`
-              : "Final"
+            dayKey: dayKeyET(gameDate),
+            awayAbbr,
+            homeAbbr,
+            awayId: awayTeam?.id,
+            homeId: homeTeam?.id,
+            final: finalText
           });
         }
       }
-      // Newest first on results page
       out.sort((a,b) => new Date(b.gameDate) - new Date(a.gameDate));
       return out;
     }
 
     const listEl = document.getElementById("list");
-    const qEl = document.getElementById("q");
     const countEl = document.getElementById("count");
+    const teamFilterEl = document.getElementById("teamFilter");
+    const dateFilterEl = document.getElementById("dateFilter");
 
-    function render(items, picks){
+    let ALL_FINALS = [];
+    let PICKS = {};
+
+    function buildFilters(games){
+      const teamSet = new Set();
+      const dateSet = new Set();
+
+      for(const g of games){
+        if(g.awayAbbr) teamSet.add(g.awayAbbr);
+        if(g.homeAbbr) teamSet.add(g.homeAbbr);
+        if(g.dayKey) dateSet.add(g.dayKey);
+      }
+
+      const teams = Array.from(teamSet).sort();
+      const dates = Array.from(dateSet).sort();
+
+      teamFilterEl.innerHTML = `<option value="ALL">All</option>` + teams.map(t => `<option value="${t}">${t}</option>`).join("");
+      dateFilterEl.innerHTML = `<option value="ALL">All</option>` + dates.map(d => `<option value="${d}">${d}</option>`).join("");
+    }
+
+    function applyFilters(){
+      const teamVal = teamFilterEl.value;
+      const dateVal = dateFilterEl.value;
+
+      let items = ALL_FINALS.slice();
+
+      if(teamVal !== "ALL"){
+        items = items.filter(g => g.awayAbbr === teamVal || g.homeAbbr === teamVal);
+      }
+      if(dateVal !== "ALL"){
+        items = items.filter(g => g.dayKey === dateVal);
+      }
+
+      render(items);
+    }
+
+    function render(items){
       listEl.innerHTML = "";
+
+      if(!items.length){
+        listEl.innerHTML = `<div class="empty">No final games yet for these filters.</div>`;
+        countEl.textContent = "0 finals";
+        return;
+      }
 
       items.forEach(g => {
         const pk = String(g.gamePk || "");
-        const entry = picks?.[pk] || {};
+        const entry = PICKS?.[pk] || {};
         const pick = entry?.pick || "TBD";
-        const why = Array.isArray(entry?.why) ? entry.why : [];
-        const notes = Array.isArray(entry?.notes) ? entry.notes : [];
 
-        const awayLogo = logoUrl(g.away);
-        const homeLogo = logoUrl(g.home);
+        const awayLogo = logoUrlByTeamId(g.awayId);
+        const homeLogo = logoUrlByTeamId(g.homeId);
         const dt = fmtDateTimeET(g.gameDate);
 
         const card = document.createElement("article");
@@ -293,7 +407,7 @@
           <div class="cardHead">
             <div class="meta">
               <div class="date">${dt.date}  •  ${dt.time}</div>
-              <div class="match">${g.away} @ ${g.home}</div>
+              <div class="match">${g.awayAbbr} @ ${g.homeAbbr}</div>
             </div>
             <div class="tag">Final: <strong>${g.final}</strong></div>
           </div>
@@ -301,41 +415,31 @@
           <div class="cardBody">
             <div class="teams">
               <div class="team">
-                <div class="logo" data-abbr="${g.away}">
-                  ${awayLogo ? `<img alt="${g.away} logo" src="${awayLogo}" />` : logoFallbackHTML(g.away)}
+                <div class="logo" data-fallback="${g.awayAbbr}">
+                  ${awayLogo ? `<img alt="${g.awayAbbr} logo" src="${awayLogo}" />` : logoFallbackHTML(g.awayAbbr)}
                 </div>
-                <div class="abbr">${g.away}</div>
+                <div class="abbr">${g.awayAbbr}</div>
               </div>
 
               <div class="vs">VS</div>
 
               <div class="team" style="justify-content:flex-end">
-                <div class="abbr">${g.home}</div>
-                <div class="logo" data-abbr="${g.home}">
-                  ${homeLogo ? `<img alt="${g.home} logo" src="${homeLogo}" />` : logoFallbackHTML(g.home)}
+                <div class="abbr">${g.homeAbbr}</div>
+                <div class="logo" data-fallback="${g.homeAbbr}">
+                  ${homeLogo ? `<img alt="${g.homeAbbr} logo" src="${homeLogo}" />` : logoFallbackHTML(g.homeAbbr)}
                 </div>
               </div>
             </div>
 
             <div class="split">
               <div class="box">
-                <p class="boxTitle">Your pick</p>
+                <p class="boxTitle">Pick</p>
                 <p class="big">${pick}</p>
-                ${
-                  why.length
-                    ? `<ul>${why.map(x => `<li>${x}</li>`).join("")}</ul>`
-                    : `<div class="muted" style="font-size:13px;line-height:1.45">No pick logged. Add gamePk <strong>${pk}</strong> to picks.json</div>`
-                }
               </div>
 
               <div class="box">
-                <p class="boxTitle">Outcome notes</p>
-                <p class="big">${g.final}</p>
-                ${
-                  notes.length
-                    ? `<ul>${notes.map(x => `<li>${x}</li>`).join("")}</ul>`
-                    : `<div class="muted" style="font-size:13px;line-height:1.45">No notes yet. Add a couple bullets in picks.json if you want.</div>`
-                }
+                <p class="boxTitle">Why</p>
+                <p class="big" style="font-weight:650;color:rgba(0,0,0,.75)">TBD</p>
               </div>
             </div>
           </div>
@@ -346,7 +450,7 @@
       listEl.querySelectorAll(".logo img").forEach(img => {
         img.addEventListener("error", (e) => {
           const wrap = e.target.closest(".logo");
-          const abbr = wrap.getAttribute("data-abbr") || "";
+          const abbr = wrap.getAttribute("data-fallback") || "";
           wrap.innerHTML = logoFallbackHTML(abbr);
         });
       });
@@ -354,38 +458,21 @@
       countEl.textContent = `${items.length} final${items.length === 1 ? "" : "s"}`;
     }
 
-    function applySearch(items, picks){
-      const q = (qEl.value || "").trim().toUpperCase();
-      if(!q) return items;
-      return items.filter(g => {
-        const pk = String(g.gamePk || "");
-        const entry = picks?.[pk] || {};
-        const hay = `${pk} ${g.away} ${g.home} ${g.final} ${(entry.pick||"")} ${(entry.why||[]).join(" ")} ${(entry.notes||[]).join(" ")}`.toUpperCase();
-        return hay.includes(q);
-      });
-    }
-
     async function boot(){
       try{
         const [scheduleJson, picks] = await Promise.all([fetchSchedule2026WithLinescore(), fetchPicks()]);
-        const finals = flattenFinalGames(scheduleJson);
+        PICKS = picks || {};
+        ALL_FINALS = flattenFinals(scheduleJson);
 
-        function rerender(){
-          const filtered = applySearch(finals, picks);
-          render(filtered, picks);
-        }
+        buildFilters(ALL_FINALS);
 
-        qEl.addEventListener("input", rerender);
-        rerender();
+        teamFilterEl.addEventListener("change", applyFilters);
+        dateFilterEl.addEventListener("change", applyFilters);
+
+        applyFilters();
       }catch(err){
-        listEl.innerHTML = `
-          <div class="card" style="grid-column: span 12; padding:14px">
-            <div style="font-weight:700;margin-bottom:6px">Could not load results</div>
-            <div class="muted" style="font-size:13px;line-height:1.45">
-              ${String(err?.message || err)}
-            </div>
-          </div>
-        `;
+        listEl.innerHTML = `<div class="empty">Could not load results. ${String(err?.message || err)}</div>`;
+        countEl.textContent = "";
       }
     }
 
