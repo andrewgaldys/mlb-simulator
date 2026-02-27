@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MLB 2026 Predictions | Past Games</title>
-  <meta name="description" content="Past MLB games with predictions and outcomes." />
+  <title>MLB 2026 Picks Journal | Results</title>
+  <meta name="description" content="Past MLB games with your pick and the final outcome." />
   <style>
     :root{
       --bg0:#ffffff;
@@ -15,10 +15,7 @@
       --muted:rgba(0,0,0,.62);
       --shadow: 0 18px 45px rgba(0,0,0,.08);
       --radius:18px;
-      --good: rgba(0,0,0,.10);
-      --bad: rgba(0,0,0,.10);
     }
-
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
@@ -30,8 +27,8 @@
         radial-gradient(900px 500px at 85% 20%, rgba(0,0,0,.04), transparent 55%),
         linear-gradient(180deg, var(--bg0), var(--bg1));
     }
-
     .wrap{max-width:1100px;margin:0 auto;padding:28px 18px 40px}
+
     header{
       display:flex;gap:14px;align-items:center;justify-content:space-between;
       padding:14px 14px 18px;
@@ -40,7 +37,7 @@
     .mark{
       width:38px;height:38px;border-radius:12px;
       background:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.03));
-      border:1px solid var(--stroke);
+      border:1px solid rgba(0,0,0,.08);
       box-shadow: 0 10px 24px rgba(0,0,0,.08);
     }
     h1{font-size:18px;margin:0;letter-spacing:.2px}
@@ -50,7 +47,7 @@
     .pill{
       display:inline-flex;align-items:center;gap:8px;
       padding:10px 12px;border-radius:999px;
-      border:1px solid var(--stroke);
+      border:1px solid rgba(0,0,0,.08);
       background:rgba(255,255,255,.55);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
@@ -69,7 +66,7 @@
     .search{
       flex:1;display:flex;gap:10px;align-items:center;max-width:560px;
       padding:12px 12px;border-radius:999px;
-      border:1px solid var(--stroke);
+      border:1px solid rgba(0,0,0,.08);
       background:rgba(255,255,255,.55);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
@@ -81,27 +78,6 @@
     }
     .hint{font-size:12.5px;color:var(--muted);white-space:nowrap}
 
-    .toggle{
-      display:flex;gap:8px;align-items:center;
-      border:1px solid rgba(0,0,0,.08);
-      background:rgba(255,255,255,.55);
-      border-radius:999px;
-      padding:6px;
-      box-shadow: 0 14px 34px rgba(0,0,0,.06);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-    .toggle button{
-      border:0;background:transparent;cursor:pointer;
-      padding:8px 10px;border-radius:999px;
-      font-size:12.5px;color:rgba(0,0,0,.70);
-    }
-    .toggle button.active{
-      background:rgba(0,0,0,.08);
-      color:rgba(0,0,0,.90);
-      border:1px solid rgba(0,0,0,.10);
-    }
-
     .grid{
       display:grid;
       grid-template-columns: repeat(12, 1fr);
@@ -111,7 +87,7 @@
     .card{
       grid-column: span 6;
       border-radius:var(--radius);
-      border:1px solid var(--stroke);
+      border:1px solid rgba(0,0,0,.08);
       background:var(--card);
       box-shadow:var(--shadow);
       backdrop-filter: blur(14px);
@@ -130,19 +106,13 @@
     .meta .date{font-size:12.5px;color:var(--muted)}
     .meta .match{font-size:14.5px;font-weight:650;letter-spacing:.2px}
 
-    .pill2{
+    .tag{
       padding:8px 10px;border-radius:999px;
       border:1px solid rgba(0,0,0,.10);
       background:rgba(255,255,255,.50);
       font-size:12.5px;
-      display:flex;gap:8px;align-items:center;white-space:nowrap;
+      white-space:nowrap;
     }
-    .dot{
-      width:8px;height:8px;border-radius:999px;background:rgba(0,0,0,.35);
-      display:inline-block;
-    }
-    .dot.win{background:rgba(0,0,0,.60)}
-    .dot.loss{background:rgba(0,0,0,.25)}
 
     .cardBody{padding:12px 14px 14px}
     .teams{
@@ -196,11 +166,7 @@
       line-height:1.45;
     }
 
-    footer{
-      padding:22px 14px 0;
-      color:var(--muted);
-      font-size:12.5px;
-    }
+    footer{padding:22px 14px 0;color:var(--muted);font-size:12.5px}
     .note{
       border:1px solid rgba(0,0,0,.08);
       background:rgba(255,255,255,.55);
@@ -220,29 +186,22 @@
       <div class="brand">
         <div class="mark" aria-hidden="true"></div>
         <div>
-          <h1>MLB 2026 Predictions</h1>
-          <div class="sub">Past games, picks, and outcomes</div>
+          <h1>MLB 2026 Picks Journal</h1>
+          <div class="sub">Results you update after games finish</div>
         </div>
       </div>
 
       <nav>
         <a class="pill" href="./index.html">Upcoming <small>2026</small></a>
-        <a class="pill active" href="./results.html">Past Games <small>Results</small></a>
+        <a class="pill active" href="./results.html">Results <small>Journal</small></a>
       </nav>
     </header>
 
     <div class="topbar">
       <div class="search" role="search">
         <span class="muted" aria-hidden="true">Search</span>
-        <input id="q" type="search" placeholder="Try: LAD, STL, WIN, LOSS..." autocomplete="off" />
+        <input id="q" type="search" placeholder="Try: NYY, LAD, 04/02, final..." autocomplete="off" />
       </div>
-
-      <div class="toggle" aria-label="Filter results">
-        <button id="allBtn" class="active" type="button">All</button>
-        <button id="winBtn" type="button">Wins</button>
-        <button id="lossBtn" type="button">Losses</button>
-      </div>
-
       <div class="hint" id="count"></div>
     </div>
 
@@ -250,14 +209,13 @@
 
     <footer>
       <div class="note">
-        <div><strong>Tip:</strong> Your model can log confidence, edges, and key drivers. Keep the explanation short and consistent.</div>
-        <div class="muted">Team logo format uses MLB static team assets by team ID.  [oai_citation:3‡Reddit](https://www.reddit.com/r/mlbdata/comments/1b1eit0/team_logos/?utm_source=chatgpt.com)</div>
+        <div><strong>Workflow:</strong> After a game ends, add an entry here with the final score and any quick notes. Keep it clean, like a logbook.</div>
+        <div class="muted">This page also auto sorts newest to oldest by date/time.</div>
       </div>
     </footer>
   </div>
 
   <script>
-    // Team ID list reference: MLB Gameday team information.  [oai_citation:4‡GitHub](https://raw.githubusercontent.com/jasonlttl/gameday-api-docs/master/team-information.md)
     const TEAM = {
       ARI:{id:109}, ATL:{id:144}, BAL:{id:110}, BOS:{id:111}, CHC:{id:112},
       CWS:{id:145}, CIN:{id:113}, CLE:{id:114}, COL:{id:115}, DET:{id:116},
@@ -286,74 +244,49 @@
       `;
     }
 
-    // Sample "past games" data (swap with real history).
-    const PAST = [
+    function fmtDate(iso){
+      const d = new Date(iso + "T00:00:00");
+      return d.toLocaleDateString(undefined, { weekday:"short", month:"short", day:"numeric", year:"numeric" });
+    }
+
+    function parseGameDateTime(dateISO, timeET){
+      try{
+        const m = String(timeET || "").match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+        let hh = 0, mm = 0;
+        if(m){
+          hh = parseInt(m[1], 10);
+          mm = parseInt(m[2], 10);
+          const ap = m[3].toUpperCase();
+          if(ap === "PM" && hh !== 12) hh += 12;
+          if(ap === "AM" && hh === 12) hh = 0;
+        }
+        return new Date(`${dateISO}T${String(hh).padStart(2,"0")}:${String(mm).padStart(2,"0")}:00`);
+      }catch{
+        return new Date(dateISO + "T00:00:00");
+      }
+    }
+
+    // Results entries: you will update these after games.
+    // Fields:
+    //  - date, timeET, away, home
+    //  - pick, why
+    //  - final (example: "LAD 6, SFG 2")
+    //  - notes (short bullets)
+    const RESULTS = [
       {
         date: "2026-04-02",
-        away: "NYY",
-        home: "HOU",
-        pick: "HOU",
-        confidence: 0.56,
-        why: [
-          "Bullpen depth edge late innings",
-          "Better matchup vs projected starter profile"
-        ],
-        final: "NYY 4, HOU 3",
-        correct: false,
-        outcomeNotes: [
-          "Late defensive misplay flipped leverage",
-          "High variance 1 run game"
-        ]
-      },
-      {
-        date: "2026-04-02",
+        timeET: "4:10 PM ET",
         away: "LAD",
         home: "SFG",
         pick: "LAD",
-        confidence: 0.60,
         why: [
-          "Higher projected OBP top of lineup",
-          "Platoon advantage vs late relievers"
+          "Top of lineup gets on base",
+          "Platoon matchups look favorable"
         ],
         final: "LAD 6, SFG 2",
-        correct: true,
-        outcomeNotes: [
-          "Early multi run inning created cushion",
-          "Bullpen closed clean"
-        ]
-      },
-      {
-        date: "2026-04-03",
-        away: "BOS",
-        home: "TOR",
-        pick: "TOR",
-        confidence: 0.53,
-        why: [
-          "Contact profile vs pitch mix",
-          "Slight bullpen leverage advantage"
-        ],
-        final: "TOR 5, BOS 4",
-        correct: true,
-        outcomeNotes: [
-          "Clutch hits with RISP",
-          "One key HR decided it"
-        ]
-      },
-      {
-        date: "2026-04-03",
-        away: "CHC",
-        home: "STL",
-        pick: "STL",
-        confidence: 0.54,
-        why: [
-          "Starting pitching depth edge",
-          "Lower strikeout rate in high leverage spots"
-        ],
-        final: "CHC 3, STL 1",
-        correct: false,
-        outcomeNotes: [
-          "Starter underperformed projection",
-          "Offense stranded runners"
+        notes: [
+          "Early runs, then coasted",
+          "Bullpen clean finish"
         ]
       }
     ];
@@ -361,48 +294,30 @@
     const listEl = document.getElementById("list");
     const qEl = document.getElementById("q");
     const countEl = document.getElementById("count");
-    const allBtn = document.getElementById("allBtn");
-    const winBtn = document.getElementById("winBtn");
-    const lossBtn = document.getElementById("lossBtn");
 
-    let mode = "ALL";
-
-    function fmtDate(iso){
-      const d = new Date(iso + "T00:00:00");
-      return d.toLocaleDateString(undefined, { weekday:"short", month:"short", day:"numeric", year:"numeric" });
-    }
-    function pct(x){ return Math.round(x * 100) + "%"; }
-
-    function setMode(m){
-      mode = m;
-      [allBtn, winBtn, lossBtn].forEach(b => b.classList.remove("active"));
-      if(m === "ALL") allBtn.classList.add("active");
-      if(m === "WIN") winBtn.classList.add("active");
-      if(m === "LOSS") lossBtn.classList.add("active");
-      applyFilter();
+    function sortNewestFirst(arr){
+      return arr.slice().sort((a,b) => {
+        const da = parseGameDateTime(a.date, a.timeET).getTime();
+        const db = parseGameDateTime(b.date, b.timeET).getTime();
+        return db - da;
+      });
     }
 
     function render(items){
       listEl.innerHTML = "";
-
       items.forEach(g => {
         const awayLogo = logoUrl(g.away);
         const homeLogo = logoUrl(g.home);
 
         const card = document.createElement("article");
         card.className = "card";
-
         card.innerHTML = `
           <div class="cardHead">
             <div class="meta">
-              <div class="date">${fmtDate(g.date)}</div>
+              <div class="date">${fmtDate(g.date)}  •  ${g.timeET || ""}</div>
               <div class="match">${g.away} @ ${g.home}</div>
             </div>
-
-            <div class="pill2">
-              <span class="dot ${g.correct ? "win" : "loss"}"></span>
-              <span><strong>${g.correct ? "WIN" : "LOSS"}</strong></span>
-            </div>
+            <div class="tag">Final: <strong>${g.final || "TBD"}</strong></div>
           </div>
 
           <div class="cardBody">
@@ -427,19 +342,18 @@
             <div class="split">
               <div class="box">
                 <p class="boxTitle">Your pick</p>
-                <p class="big">${g.pick} <span class="muted">(${pct(g.confidence)})</span></p>
-                <ul>${g.why.map(x => `<li>${x}</li>`).join("")}</ul>
+                <p class="big">${g.pick}</p>
+                <ul>${(g.why || []).map(x => `<li>${x}</li>`).join("")}</ul>
               </div>
 
               <div class="box">
-                <p class="boxTitle">Outcome</p>
-                <p class="big">${g.final}</p>
-                <ul>${g.outcomeNotes.map(x => `<li>${x}</li>`).join("")}</ul>
+                <p class="boxTitle">Outcome notes</p>
+                <p class="big">${g.final || "TBD"}</p>
+                <ul>${(g.notes || []).map(x => `<li>${x}</li>`).join("")}</ul>
               </div>
             </div>
           </div>
         `;
-
         listEl.appendChild(card);
       });
 
@@ -451,20 +365,16 @@
         });
       });
 
-      countEl.textContent = `${items.length} game${items.length === 1 ? "" : "s"}`;
+      countEl.textContent = `${items.length} entr${items.length === 1 ? "y" : "ies"}`;
     }
 
     function applyFilter(){
       const q = (qEl.value || "").trim().toUpperCase();
-
-      let items = PAST.slice();
-
-      if(mode === "WIN") items = items.filter(g => g.correct);
-      if(mode === "LOSS") items = items.filter(g => !g.correct);
+      let items = sortNewestFirst(RESULTS);
 
       if(q){
         items = items.filter(g => {
-          const hay = `${g.date} ${g.away} ${g.home} ${g.pick} ${g.final} ${g.correct ? "WIN" : "LOSS"} ${g.why.join(" ")} ${g.outcomeNotes.join(" ")}`.toUpperCase();
+          const hay = `${g.date} ${g.timeET || ""} ${g.away} ${g.home} ${g.pick} ${g.final || ""} ${(g.why||[]).join(" ")} ${(g.notes||[]).join(" ")}`.toUpperCase();
           return hay.includes(q);
         });
       }
@@ -473,11 +383,7 @@
     }
 
     qEl.addEventListener("input", applyFilter);
-    allBtn.addEventListener("click", () => setMode("ALL"));
-    winBtn.addEventListener("click", () => setMode("WIN"));
-    lossBtn.addEventListener("click", () => setMode("LOSS"));
-
-    render(PAST);
+    applyFilter();
   </script>
 </body>
 </html>
