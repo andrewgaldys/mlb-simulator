@@ -8,6 +8,15 @@
   <meta name="description" content="Upcoming MLB regular season games in 2026 with picks." />
   <style>
 
+.why ul{
+  margin:6px 0 0 18px;
+  padding:0;
+}
+.why li{
+  margin:3px 0;
+  font-size:13px;
+}
+    
     .gameId{
   position:absolute;
   bottom:10px;
@@ -412,7 +421,13 @@
               </div>
             </div>
 
-            <div class="why">TBD</div>
+          <div class="why">
+  ${
+    Array.isArray(entry?.notes) && entry.notes.length
+      ? `<ul>${entry.notes.map(n => `<li>${n}</li>`).join("")}</ul>`
+      : "TBD"
+  }
+</div>
             <div class="gameId">${g.gamePk}</div>
           </div>
         `;
